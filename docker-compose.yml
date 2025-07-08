@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  node-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: testnet-consensus-layer
+    environment:
+      - NODE_ENV=production
+      - APP_PORT=8552
+      - CUSTOM_VAR=value123
+    volumes:
+      - .:/usr/src/app
+    restart: always
