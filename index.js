@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const axios = require('axios');
 const WebSocket = require('ws');
 
-const BLOCK_HASH_ORACLE_URL = process.env.BLOCK_HASH_ORACLE_URL || 'http://64.226.120.121:8545/';
+const BLOCK_HASH_ORACLE_URL = process.env.BLOCK_HASH_ORACLE_URL || 'ws://64.226.120.121:8546/';
 const ENGINE_API_URL = process.env.ENGINE_API_URL || 'http://127.0.0.1:8552';
 const JWT_SECRET_PATH = process.env.JWT_SECRET_PATH || './jwt.hex';
 
