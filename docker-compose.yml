@@ -7,9 +7,10 @@ services:
       dockerfile: Dockerfile
     container_name: testnet-consensus-layer
     environment:
-      - NODE_ENV=production
-      - APP_PORT=8552
-      - CUSTOM_VAR=value123
+      - BLOCK_HASH_ORACLE_URL=ws://10.114.0.3:8546/
+      - ENGINE_API_URL=http://127.0.0.1:8551
+      - JWT_SECRET_PATH=/usr/src/app/jwt.hex
+    network_mode: host
     volumes:
-      - .:/usr/src/app
+      - "/opt/fluent-rpc-data/jwt.hex:/usr/src/app/jwt.hex"
     restart: always
