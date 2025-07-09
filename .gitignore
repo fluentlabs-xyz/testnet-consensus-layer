@@ -2,3 +2,5 @@
 .DS_Store
 /node_modules
 jwt.hex
+/fluent-rpc-data
+.env

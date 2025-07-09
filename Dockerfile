@@ -2,7 +2,7 @@
 FROM node:18-alpine
 
 # Set environment variables
-ENV APP_DIR=/usr/src/app
+ENV APP_DIR=/app
 WORKDIR $APP_DIR
 
 ARG BLOCK_HASH_ORACLE_URL

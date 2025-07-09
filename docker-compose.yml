@@ -1,16 +1,51 @@
-version: '3.8'
-
 services:
-  node-app:
+  execution-layer:
+    image: ghcr.io/fluentlabs-xyz/fluent:v0.3.3-dev
+    container_name: execution-layer
+    command:
+      - node
+      - --chain=testnet
+      - --datadir=/opt/fluent-rpc-data
+      # discovery
+      - --discovery.port=30303
+      - --discovery.addr=0.0.0.0
+      - --disable-discovery
+      - --trusted-peers=${TRUSTED_PEERS}
+      # http
+      - --http
+      - --http.addr=0.0.0.0
+      - --http.api=eth,web3
+      - --http.port=8545
+      - --http.corsdomain=*
+      # ws
+      - --ws
+      - --ws.addr=0.0.0.0
+      - --ws.api=eth,web3
+      - --ws.port=8545
+      - --ws.origins=*
+      # auth
+      - --authrpc.addr=0.0.0.0
+      - --authrpc.port=8551
+      # misc
+      - --metrics=0.0.0.0:9091
+    ports:
+      - "8545"
+      - "8546"
+    volumes:
+      - "./fluent-rpc-data:/opt/fluent-rpc-data"
+      - "./jwt.hex:/opt/fluent-rpc-data/jwt.hex"
+    restart: always
+  consensus-layer:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: testnet-consensus-layer
+    container_name: consensus-layer
+    depends_on:
+      - execution-layer
     environment:
-      - BLOCK_HASH_ORACLE_URL=ws://10.114.0.3:8546/
-      - ENGINE_API_URL=http://127.0.0.1:8551
-      - JWT_SECRET_PATH=/usr/src/app/jwt.hex
-    network_mode: host
+      - BLOCK_HASH_ORACLE_URL=${BLOCK_HASH_ORACLE}
+      - ENGINE_API_URL=http://execution-layer:8551
+      - JWT_SECRET_PATH=/app/jwt.hex
     volumes:
-      - "/opt/fluent-rpc-data/jwt.hex:/usr/src/app/jwt.hex"
+      - "./jwt.hex:/app/jwt.hex"
     restart: always
