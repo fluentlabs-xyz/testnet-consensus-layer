@@ -32,7 +32,7 @@ services:
       - "8545"
       - "8546"
     volumes:
-      - "./fluent-rpc-data:/opt/fluent-rpc-data"
+      - "${DATA_DIR}:/opt/fluent-rpc-data"
       - "./jwt.hex:/opt/fluent-rpc-data/jwt.hex"
     restart: always
   consensus-layer:
