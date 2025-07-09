@@ -47,5 +47,5 @@ services:
       - ENGINE_API_URL=http://execution-layer:8551
       - JWT_SECRET_PATH=/app/jwt.hex
     volumes:
-      - "./jwt.hex:/app/jwt.hex"
+      - "${JWT_KEY_PATH}:/app/jwt.hex"
     restart: always

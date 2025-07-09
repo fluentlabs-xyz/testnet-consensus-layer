@@ -13,9 +13,10 @@ ARG JWT_SECRET_PATH
 RUN npm install -g pm2
 
 # Copy app files
-COPY package*.json ./
-RUN npm install
-COPY . .
+COPY package.json ./
+COPY yarn.lock ./
+RUN yarn
+COPY index.js ./
 
 # Expose app port
 EXPOSE 3000
