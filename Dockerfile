@@ -18,8 +18,5 @@ COPY yarn.lock ./
 RUN yarn
 COPY index.js ./
 
-# Expose app port
-EXPOSE 3000
-
 # Use PM2 to run the app
-CMD ["pm2-runtime", "start", "index.js", "--name", "myapp"]
+CMD ["pm2-runtime", "start", "index.js", "--name", "testnet-consensus-layer"]
