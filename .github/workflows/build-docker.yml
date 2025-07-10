@@ -40,4 +40,4 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64
           push: true
-          tags: latest
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
