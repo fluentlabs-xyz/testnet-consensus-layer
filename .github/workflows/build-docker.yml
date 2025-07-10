@@ -3,12 +3,7 @@ name: Build Docker Image
 on:
   push:
     branches:
-      - devel
-    tags:
-      - "v*"
-    paths:
-      - "crates/build/**"
-      - ".github/workflows/build-docker.yml"
+      - main
   workflow_dispatch:
 
 env:
