@@ -36,6 +36,7 @@ services:
       - "./jwt.hex:/opt/fluent-rpc-data/jwt.hex"
     restart: always
   consensus-layer:
+    image: ghcr.io/fluentlabs-xyz/testnet-consensus-layer:latest
     build:
       context: .
       dockerfile: Dockerfile
