@@ -99,7 +99,7 @@ async function getBlockHashPoller(url, onNewHash) {
 async function main() {
   // Subscribe or poll for new block hashes
   await getBlockHashPoller(BLOCK_HASH_ORACLE_URL, async (newHash, newNumber) => {
-    console.log(`${new Date()}:\tNew block hash=${newHash}, number=${newNumber}`);
+    console.log(`${new Date().toISOString()}:\tNew block hash=${newHash}, number=${newNumber}`);
     const forkchoiceParams = [
       {
         headBlockHash: newHash,
@@ -109,7 +109,7 @@ async function main() {
     ];
     try {
       const result = await engine('engine_forkchoiceUpdatedV3', forkchoiceParams);
-      console.log(`${new Date()}:\tForkchoice updated:`, result.payloadStatus.status);
+      console.log(`${new Date().toISOString()}:\tForkchoice updated:`, result.payloadStatus.status);
     } catch (e) {
       console.error('Error calling engine_forkchoiceUpdatedV3:', e.message);
     }
