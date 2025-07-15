@@ -107,8 +107,12 @@ async function main() {
         finalizedBlockHash: newHash
       },
     ];
-    const result = await engine('engine_forkchoiceUpdatedV3', forkchoiceParams);
-    console.log('Forkchoice updated:', result.payloadStatus.status);
+    try {
+      const result = await engine('engine_forkchoiceUpdatedV3', forkchoiceParams);
+      console.log('Forkchoice updated:', result.payloadStatus.status);
+    } catch (e) {
+      console.error('Error calling engine_forkchoiceUpdatedV3:', e.message);
+    }
   });
 }
 
