@@ -1,10 +1,10 @@
 services:
   execution-layer:
-    image: ghcr.io/fluentlabs-xyz/fluent:v0.3.3-dev
+    image: ghcr.io/fluentlabs-xyz/fluent:v0.4.12-dev
     container_name: execution-layer
     command:
       - node
-      - --chain=testnet
+      - --chain=fluent-testnet
       - --datadir=/opt/fluent-rpc-data
       # discovery
       - --discovery.port=30303
@@ -31,6 +31,7 @@ services:
     ports:
       - "8545"
       - "30303"
+      - "9091"
     volumes:
       - "${DATA_DIR}:/opt/fluent-rpc-data"
       - "./jwt.hex:/opt/fluent-rpc-data/jwt.hex"
